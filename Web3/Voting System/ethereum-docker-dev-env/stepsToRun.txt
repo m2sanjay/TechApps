@@ -1,0 +1,102 @@
+Docker
+Visual Studio Code
+
+Im using ubuntu WSL on windows 11
+mkdir ethereum-docker-dev-env
+cd ethereum-docker-dev-env
+code .
+
+New ubuntu terminal
+mkdir docker
+cd docker
+mkdir truffle
+cd truffle
+touch Dockerfile
+	Add the depandencies of truffle 
+
+cd ..
+mkdir ganache-cli
+cd ganache-cli
+touch Dockerfile
+	Add the depandencies of ganache 
+
+cd ../..
+touch docker-compose.yml
+	Add required docker referencies in docker-compose
+	
+start docker on windows (docker demon)
+docker compose up - takes 5-10 mins
+
+Test commands
+	docker exec -it truffle_suite bash
+	truffle version
+	
+	docker exec -it ganache-cli sh
+	
+Go to workspace for trffule commands
+cd ../../workspace/
+truffle migrate --reset
+	
+VS setup
+install extension - Dev Containers
+Need to create .devcontainer dir - perform below steps
+	Test F1 -> Add Dev Container Configuration Files'
+	This would create .devcontainer (2 files inside 1 json and 1 docker-compose)
+	
+	Again F1 -> "Rebuild and Reopen in Container"
+	This will close down VSCode, and reopen it with the usual GUI attached to the ‘truggle_suite’ Docker container.
+	
+	npm run dev
+ 
+ https://levelup.gitconnected.com/run-the-ganache-cli-inside-the-docker-container-5e70bc962bfe
+ https://medium.com/coinmonks/ethereum-development-in-docker-a6bd11d00ef2
+ https://github.com/dappuniversity/election/blob/2019_update/contracts/Election.sol
+ https://www.linkedin.com/pulse/run-ganache-cli-inside-docker-container-shubham-kumar-chadokar/
+ 
+ 
+
+Step to run -
+	F1 -> "Rebuild and Reopen in Container"
+		This will close down VSCode, and reopen it with the usual GUI attached to the ‘truggle_suite’ Docker container.
+		
+	click on ganche container and click - "show container logs"
+		This will displat test accounts and assicated prvate keys
+		
+		
+	from `workspace` folder in truffle container		
+		truffle migrate --reset    //this will deploy the contract, once done check ganche log - if contact is deployed
+		
+	run - npm run dev   // its houdl open http://localhost:3000/
+		
+	Copy any private keys and import in metamask ('local' make sure its local ganche is already conencted)
+	
+	we can keep changing the account and check if voting allowed
+	
+	
+	To test function - from 'workspace'
+		truffle console
+		
+		Election.deployed().then(function(instance) { app = instance})
+		app.candidatesCount()		// Returns BN (big number)
+		
+		
+		let count = await app.candidatesCount()
+		count.toNumber()    //should get 2
+		
+		app.voters('0x26090dc001e3a7a5dcc6d41f3fe7dec9c1e9f068')  // if already voted should return false, else true
+		
+		app.candidates('1') // Should return JSON rep of 'Candidate 1'
+		
+		
+		web3.eth.getAccounts().then(function(acc){ accounts = acc })
+		accounts
+		
+		//chhose any account and vote
+		app.vote(1, {from : '0xEFbF900412B793aF2D037B10Bd551f9806838099'})
+		
+	
+		
+		
+		
+		
+	
