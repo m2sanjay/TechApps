@@ -50,7 +50,6 @@ Need to create .devcontainer dir - perform below steps
  
  https://levelup.gitconnected.com/run-the-ganache-cli-inside-the-docker-container-5e70bc962bfe
  https://medium.com/coinmonks/ethereum-development-in-docker-a6bd11d00ef2
- https://github.com/dappuniversity/election/blob/2019_update/contracts/Election.sol
  https://www.linkedin.com/pulse/run-ganache-cli-inside-docker-container-shubham-kumar-chadokar/
  
  
