@@ -1,0 +1,23 @@
+version: "3"
+services:
+    # start the ganache cli container
+    ganache-cli:
+        container_name: ganache-cli
+        build:
+            context: ./docker/ganache-cli
+        # note host:container
+        ports:
+            - 5545:8545
+    truffle_suite:
+        container_name: truffle_suite
+        build:
+            context: ./docker/truffle
+                # volumes
+        ports:
+            - 3000:3000
+        volumes:
+            - ".:/workspace"
+        # command: >
+        #     bash
+        stdin_open: true # docker run -i
+        tty: true # docker run -t
